@@ -1,22 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator,MaxValueValidator
-
-
-
-class CustomUser(AbstractUser):
-    user_type_choices=[
-        ('Admin', 'Admin'),
-        ('User' ,'User'),
-    ]
-    user_type=models.CharField(max_length=50,choices=user_type_choices,default='User')
     
     
-class admin(CustomUser):
+class admin(models.Model):
+    username=models.CharField(max_length=100)
     email_address=models.EmailField()
+    password=models.CharField(max_length=100)
     
 
-class user(CustomUser):
+class user(models.Model):
     firstname=models.CharField(max_length=100)
     lastname=models.CharField(max_length=100)
     phone=models.CharField(max_length=100)
@@ -24,10 +17,12 @@ class user(CustomUser):
     address=models.CharField(max_length=100,null=True)
     id_proof=models.FileField(null=True,upload_to="images")
     profile=models.ImageField(upload_to="images",null=True)
+    username=models.CharField(max_length=100)
+    password=models.CharField(max_length=100)
     is_available=models.BooleanField(default=True,null=True)
 
     def __str__(self):
-        return self.first_name
+        return self.firstname
     
     
 class Spice(models.Model):
