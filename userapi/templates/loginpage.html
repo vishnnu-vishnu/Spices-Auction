@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
-    <title>Ludiflex | Login & Registration</title>
+    <title>Spices Auction | Login & Registration</title>
     <style>
         /* POPPINS FONT */
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -308,7 +308,7 @@ header{
     </nav>
 
 <!----------------------------- Form box ----------------------------------->    
-    <div class="form-box" style=" height: 800px;">
+    <div class="form-box" style=" height: 800px; ">
         
         <!------------------- login form -------------------------->
 
@@ -341,51 +341,77 @@ header{
 
         <!------------------- registration form -------------------------->
         <div class="register-container" id="register">
-            <div class="top">
-                <span>Have an account? <a href="#" onclick="login()">Login</a></span>
-                <header>Sign Up</header>
-            </div>
-            <div class="two-forms">
-                <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Firstname">
-                    <i class="bx bx-user"></i>
+            <form action="{% url 'saveuser' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="top">
+                    <header>Sign Up</header>
+                </div>
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Firstname" name="fname">
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Lastname" name="lname">
+                        <i class="bx bx-user"></i>
+                    </div>
+                </div>
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="email" class="input-field" placeholder="Email" name="email">
+                        <i class="bx bx-envelope"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Mobile" name="mobile">
+                        <i class="bx bx-phone"></i>
+                    </div>
+                </div>
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Username" name="username">
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Password" name="password">
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                </div>
+                <!-- <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Email" name="email">
+                    <i class="bx bx-envelope"></i>
+                </div> -->
+                <!-- <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Mobile" name="mobile">
+                    <i class="bx bx-phone"></i>
+                </div> -->
+                <!-- <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Username" name="username">
+                    <i class="bx bx-lock-alt"></i>
+                </div> -->
+                <!-- <div class="input-box">
+                    <input type="password" class="input-field" placeholder="Password" name="password">
+                    <i class="bx bx-lock-alt"></i>
+                </div> -->
+                <div class="input-box file-input">
+                    <label class="custom-file-upload">
+                        Choose Supporting Document
+                        <input type="file" class="input-field form-control" placeholder="" name="doc">
+                    </label>
+                    
                 </div>
                 <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Lastname">
-                    <i class="bx bx-user"></i>
+                    <input type="submit" class="submit" value="Register">
                 </div>
-            </div>
-            <div class="input-box">
-                <input type="text" class="input-field" placeholder="Email">
-                <i class="bx bx-envelope"></i>
-            </div>
-            <div class="input-box">
-                <input type="text" class="input-field" placeholder="Mobile">
-                <i class="bx bx-phone"></i>
-            </div>
-            <div class="input-box">
-                <input type="password" class="input-field" placeholder="Password">
-                <i class="bx bx-lock-alt"></i>
-            </div>
-            <div class="input-box file-input">
-                <label class="custom-file-upload">
-                    Choose Supporting Document
-                    <input type="file" class="input-field form-control" placeholder="Mobile">
-                </label>
-                
-            </div>
-            <div class="input-box">
-                <input type="submit" class="submit" value="Register">
-            </div>
-            <div class="two-col">
-                <div class="one">
-                    <input type="checkbox" id="register-check">
-                    <label for="register-check"> Remember Me</label>
+                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" id="register-check">
+                        <label for="register-check"> Remember Me</label>
+                    </div>
+                    <div class="two">
+                        <label><a href="#">Terms & conditions</a></label>
+                    </div>
                 </div>
-                <div class="two">
-                    <label><a href="#">Terms & conditions</a></label>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>   
