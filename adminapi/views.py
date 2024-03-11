@@ -1,59 +1,48 @@
-from django.shortcuts import render
-from django.views.generic import CreateView,FormView,ListView,UpdateView,DetailView,TemplateView,View
 from django.shortcuts import render,redirect
-from django.urls import reverse_lazy,reverse
 from django.contrib import messages
-from django.contrib.auth import authenticate,login,logout
-from django.utils.decorators import method_decorator
 
-from adminapi.forms import RegistrationForm,LoginForm
-from adminapi.models import admin,Spice
+# from django.views.generic import CreateView,FormView,ListView,UpdateView,DetailView,TemplateView,View
+# from django.shortcuts import render,redirect
+# from django.urls import reverse_lazy,reverse
+# from django.contrib import messages
+# from django.contrib.auth import authenticate,login,logout
+# from django.utils.decorators import method_decorator
+
+# from adminapi.forms import RegistrationForm,LoginForm
+from adminapi.models import Spice,Seller
+
+def sellerlogin(request):
+    return render(request,"sellerlogin.html")
 
 
-
-class SignUpView(View):
-
-    def get(self,request,*args,**kwargs):
-        form=RegistrationForm()
-        return render(request,"register.html",{"form":form})
+def save_seller(request):
+    if request.method=="POST":
+        email=request.POST.get('email')
+        mobile=request.POST.get('mobile')
+        password=request.POST.get('password')
+        username=request.POST.get('username')
+        obj=Seller(phone=mobile,email_address=email,password=password,username=username)
+        obj.save()
+        return redirect(sellerlogin)
     
-    def post(self,request,*args,**kwargs):
-        form=RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request,"registration succesfully completed")
-            return redirect("signin")
+
+
+def login_seller(request):
+    if request.method == "POST":
+        em = request.POST.get('username')
+        pwd = request.POST.get('password')
+        messages.success(request, "Login succesfully...!!")
+        if Seller.objects.filter(username=em,password=pwd).exists():
+                request.session['username']=em
+                request.session['password']=pwd
+                return redirect(sellerlogin)
         else:
-            messages.error(request,"failed to created account")
-            return render(request,"register.html",{"form":form})
-        
-
-
-class SignInView(View):
-    def get(self,request,*args,**kwargs):
-        form=LoginForm()
-        return render(request,"login.html",{"form":form})
+            return redirect(sellerlogin)
+    else:
+        return redirect(sellerlogin)
     
-    def post(self,request,*args,**kwargs):
-        form=LoginForm(request.POST)
-        if form.is_valid():
-            uname=form.cleaned_data.get("username")
-            pwd=form.cleaned_data.get("password")
-            usr=authenticate(request,username=uname,password=pwd)
-            if usr:
-                login(request,usr)
-                messages.success(request,"login success")
-                return redirect("index")
-            else:
-                messages.error(request,"invalid credentials!!!!")
-                return render(request,"login.html",{"form":form})
 
-            
-class IndexView(TemplateView):
-    template_name="index.html"
-    
-    
-class SpicesListView(ListView):
-    model=Spice
-    template_name="item_list.html"
-    context_object_name="spices"
+def logoutseller(request):
+    del request.session['username']
+    del request.session['password']
+    return redirect(sellerlogin)

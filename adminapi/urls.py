@@ -1,8 +1,11 @@
 from django.urls import path
-from adminapi.views import SignUpView,SignInView,IndexView
+from adminapi import views
 urlpatterns=[
-    path("register/",SignUpView.as_view(),name='signup'),
-    path("login/",SignInView.as_view(),name="signin"),
-    path('index/',IndexView.as_view(),name="index"),
+    path("seller_login/",views.sellerlogin,name="seller_logon"),
+    path("save_seller/",views.save_seller,name="save_seller"),
+    path("login_seller/",views.login_seller,name="login_seller"),
+
+
+    
 
 ]

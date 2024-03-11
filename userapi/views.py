@@ -7,8 +7,13 @@ from django.contrib import messages
 
 
 
+def homepage(request):
+    return render (request,"home.html")
+
 def loginpage(request):
-    return render (request,"loginpage.html")
+     return render(request,"loginpage.html")
+
+
 
 
 def saveuser(request):
@@ -25,15 +30,26 @@ def saveuser(request):
         return redirect(loginpage)
     
 
-def login_user(req):
-    if req.method == "POST":
-        em = req.POST.get('username')
-        pwd = req.POST.get('password')
-        messages.success(req, "Login succesfully...!!")
+def login_user(request):
+    if request.method == "POST":
+        em = request.POST.get('username')
+        pwd = request.POST.get('password')
+        messages.success(request, "Login succesfully...!!")
         if user.objects.filter(username=em,password=pwd).exists():
-                return redirect(loginpage)
+                request.session['username']=em
+                request.session['password']=pwd
+                return redirect(homepage)
         else:
             return redirect(loginpage)
     else:
         return redirect(loginpage)
+    
+
+def logoutuser(request):
+    del request.session['username']
+    del request.session['password']
+    return redirect(loginpage)
+
+
+
 

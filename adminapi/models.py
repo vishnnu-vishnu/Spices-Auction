@@ -1,12 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator,MaxValueValidator
-    
-    
-class admin(models.Model):
+
+
+class Seller(models.Model):
     username=models.CharField(max_length=100)
     email_address=models.EmailField()
     password=models.CharField(max_length=100)
+    phone=models.CharField(max_length=100)
+    is_available=models.BooleanField(default=True,null=True)
+    
+    
+
     
 
 class user(models.Model):
