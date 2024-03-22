@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from adminapi.models import user,Spice
 from django.contrib import messages
+from django.views.generic import CreateView,FormView,ListView,UpdateView,DetailView,TemplateView
 
 
 
@@ -42,10 +43,12 @@ def login_user(request):
         return redirect(loginpage)
 
 
-def Spice_list(request):
-    spices = Spice.objects.all()
-    return render(request, 'home.html', {'spices': spices})
-
+    
+# @method_decorator(decs,name="dispatch")
+class SpiceListView(ListView):
+    template_name="home.html"    
+    model=Spice
+    context_object_name="spices"   
           
 
 
