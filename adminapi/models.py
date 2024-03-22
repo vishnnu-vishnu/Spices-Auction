@@ -11,9 +11,6 @@ class Seller(models.Model):
     is_available=models.BooleanField(default=True,null=True)
     
     
-
-    
-
 class user(models.Model):
     firstname=models.CharField(max_length=100)
     lastname=models.CharField(max_length=100)
@@ -34,6 +31,7 @@ class Spice(models.Model):
     name=models.CharField(max_length=100)
     description=models.CharField(max_length=100)
     price=models.PositiveIntegerField()
+    image=models.ImageField(upload_to="images",null=True)
 
     def __str__(self):
         return self.name 

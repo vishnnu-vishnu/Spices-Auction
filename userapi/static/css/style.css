@@ -134,9 +134,7 @@
 .fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
     color: var(--bs-primary);
 }
-.container-fluid{
-    background: url("https://i.pinimg.com/564x/14/37/14/143714c8971b92c9bb4d200d9d56aa35.jpg");
-}
+
 
 .navbar .dropdown-toggle::after {
     border: none;
@@ -181,7 +179,6 @@
 
 /*** Hero Header ***/
 .hero-headers {
-    background: url('https://i.pinimg.com/564x/14/37/14/143714c8971b92c9bb4d200d9d56aa35.jpg');
     background-position: center;
     background-repeat: no-repeat;
 

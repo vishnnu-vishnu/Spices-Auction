@@ -1,9 +1,8 @@
 from django.shortcuts import render,redirect
-from adminapi.models import user
+from adminapi.models import user,Spice
 from django.contrib import messages
 
 
-# Create your views here.
 
 
 
@@ -12,8 +11,6 @@ def homepage(request):
 
 def loginpage(request):
      return render(request,"loginpage.html")
-
-
 
 
 def saveuser(request):
@@ -43,7 +40,14 @@ def login_user(request):
             return redirect(loginpage)
     else:
         return redirect(loginpage)
-    
+
+
+def Spice_list(request):
+    spices = Spice.objects.all()
+    return render(request, 'home.html', {'spices': spices})
+
+          
+
 
 def logoutuser(request):
     del request.session['username']
