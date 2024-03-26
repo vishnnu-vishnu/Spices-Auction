@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from adminapi.models import user,Spice
+from adminapi.models import Seller,Spice
 from django.contrib import messages
 from django.views.generic import CreateView,FormView,ListView,UpdateView,DetailView,TemplateView
 
@@ -33,7 +33,7 @@ def login_user(request):
         em = request.POST.get('username')
         pwd = request.POST.get('password')
         messages.success(request, "Login succesfully...!!")
-        if user.objects.filter(username=em,password=pwd).exists():
+        if Seller.objects.filter(username=em,password=pwd).exists():
                 request.session['username']=em
                 request.session['password']=pwd
                 return redirect(homepage)
